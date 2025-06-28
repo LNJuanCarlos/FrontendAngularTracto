@@ -74,7 +74,10 @@ import { ItemrecetaprodComponent } from './components/itemrecetaprod/itemrecetap
 import { GastosComponent } from './components/reportes/gastos/gastos.component';
 import {NgApexchartsModule} from 'ng-apexcharts';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { StocklotesComponent } from './components/reportes/stocklotes/stocklotes.component'
+import { StocklotesComponent } from './components/reportes/stocklotes/stocklotes.component';
+import { ProductoNuevoComponent } from './components/producto-nuevo/producto-nuevo.component';
+
+
 
 @NgModule({
   declarations: [
@@ -115,7 +118,8 @@ import { StocklotesComponent } from './components/reportes/stocklotes/stocklotes
     ItemrecetaprodComponent,
     GastosComponent,
     DashboardComponent,
-    StocklotesComponent
+    StocklotesComponent,
+    ProductoNuevoComponent
   ],
   imports: [
     BrowserModule,
