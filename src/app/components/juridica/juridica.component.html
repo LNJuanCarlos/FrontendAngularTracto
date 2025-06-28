@@ -1,0 +1,104 @@
+<app-formjuridica *ngIf="modalService.modal" [juridica]="juridicaSeleccionada"></app-formjuridica>
+
+<div class="row">
+  <div class="col-md-12 grid-margin stretch-card" style="align-items: center;">
+    <img style="height: 50px; width: 50px;  margin-right: 10px;" src="../../../assets/images/juridica.png" />
+    <h2 style="font-size: 30px; margin-bottom: 0px;" class="page-title">MÓDULO DE PERSONAS JURÍDICA</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <form>
+          <div class="row">
+            <div class="col-sm-5" style="align-self: center ;">
+              <h6 style="font-weight: 500; font-size: 16px; margin-bottom: 0px;" class="card-title">REGISTRAR NUEVA
+                PERSONA JURÍDICA</h6>
+
+            </div><!-- Col -->
+            <div class="col-sm-7" style="text-align:right;">
+              <div>
+                <button style="font-weight: 600; font-size: 13px; width: 200px; justify-content: center;" type="button"
+                  class="btn btn-primary btn-icon-text" (click)="abrirModalNuevo()">
+                  <i class="feather icon-plus-square btn-icon-prepend"></i>
+                  CREAR
+                </button>
+              </div>
+            </div><!-- Col -->
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12 stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h6 style="font-weight: 500; font-size: 16px;" class="card-title">LISTADO DE PERSONAS JURÍDICAS</h6>
+        <form>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="table-responsive">
+                <table id="juridicas" class="table table-bordered table-lg text-center">
+                  <thead class="bg-primary"  >
+                    <tr>
+                      <th>Nro. Documento</th>
+                      <th>Razón Social</th>
+                      <th>Teléfono</th>
+                      <th>Dirección</th>
+                      <th>Correo</th>
+                      <th>Actividad</th>
+                      <th>Estado</th>
+                      <th>Distrito</th>
+                      <th>Activar</th>
+                      <th>Acciones</th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let juridica of juridicas">
+                      <td>{{juridica.nrodoc}}</td>
+                      <td>{{juridica.razonsocial}}</td>
+                      <td>{{juridica.telefono}}</td>
+                      <td>{{juridica.direccion}}</td>
+                      <td>{{juridica.correo}}</td>
+                      <td>{{juridica.id_ACTIVIDAD.nom_ACTIVIDAD}}</td>
+                      <td *ngIf="juridica.estado =='A' else elseBlock"> <span class="badge bg-success">ACTIVO</span></td>
+                      <ng-template #elseBlock>
+                        <td> <span class="badge bg-danger">INACTIVO</span></td>
+                      </ng-template>
+                      <td>{{juridica.id_DISTRITO.nom_distrito}}</td>
+                      <td *ngIf="juridica.estado =='A' else elseButton">
+                        <button type="button" class="btn btn-secondary btn-icon btn-sm" name="inactivar"
+                          (click)="inactivarPersonaJuridica(juridica)"><i class="feather icon-check-square"></i>
+                        </button>
+                      </td>
+                      <ng-template #elseButton>
+                        <td><button type="button" class="btn btn-success btn-icon btn-sm" name="activar"
+                            (click)="activarPersonaJuridica(juridica)"><i class="feather icon-check-square"></i>
+                          </button></td>
+                      </ng-template>
+                      <td>
+                        <button style="margin-right: 2px;" type="button" class="btn btn-warning btn-icon btn-sm" name="actualizar"
+                          (click)="abrirModal(juridica)"><i class="feather icon-edit"></i>
+                        </button>
+                        <button style="margin-left: 2px;" type="button" class="btn btn-primary btn-icon btn-sm" name="eliminar"
+                        (click)='delete(juridica)'><i class="feather icon-x-square"></i>
+                      </button>
+                    </td>                    
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div><!-- Col -->
+          </div><!-- Row -->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
