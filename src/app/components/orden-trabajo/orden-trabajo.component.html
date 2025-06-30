@@ -1,0 +1,49 @@
+<div style="margin-bottom: 20px;">
+  <h2>Buscar Orden de Trabajo</h2>
+
+  <input type="text" [(ngModel)]="idOt" placeholder="Ingrese el ID de la OT" />
+  <button (click)="buscar()" [disabled]="!idOt">Buscar</button>
+</div>
+
+<!-- Si ya se buscó y se encontró -->
+<div *ngIf="detalles.length > 0">
+  <h3>Orden de Trabajo: {{ detalles[0].idOt }}</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Producto</th>
+        <th>Cantidad Solicitada</th>
+        <th>Stock</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of detalles">
+        <td>{{ item.codigoProducto }}</td>
+        <td>{{ item.nombreProducto }}</td>
+        <td>{{ item.cantidadSolicitada }}</td>
+        <td>{{ item.cantidadEnStock }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top: 20px;">
+    <label for="comentario">Comentario:</label><br />
+    <textarea
+      [(ngModel)]="comentario"
+      id="comentario"
+      rows="4"
+      cols="50"
+    ></textarea>
+    <br />
+    <button (click)="guardarComentario()" [disabled]="!comentario">
+      Guardar Comentario
+    </button>
+  </div>
+</div>
+
+<!-- Si se buscó y no se encontró -->
+<div *ngIf="busquedaRealizada && detalles.length === 0">
+  <p style="color: red">No se encontró la orden de trabajo.</p>
+</div>

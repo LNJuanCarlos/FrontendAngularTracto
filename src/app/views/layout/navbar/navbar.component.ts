@@ -51,4 +51,6 @@ export class NavbarComponent implements OnInit {
     }
   }
 
+  isDarkMode = false;
+
 }

@@ -11,6 +11,12 @@ export const MENU: MenuItem[] = [
     icon: 'package',
     link: '/producto'
   }
+,
+  {
+    label: 'Ordenes de Trabajo',
+    icon: 'file-text',
+    link: 'ordenes-trabajo'
+  }
   /*{
     label: 'Dashboard',
     icon: 'home',

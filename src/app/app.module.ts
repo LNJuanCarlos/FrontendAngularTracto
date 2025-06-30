@@ -76,6 +76,7 @@ import {NgApexchartsModule} from 'ng-apexcharts';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { StocklotesComponent } from './components/reportes/stocklotes/stocklotes.component';
 import { ProductoNuevoComponent } from './components/producto-nuevo/producto-nuevo.component';
+import { OrdenTrabajoComponent } from './components/orden-trabajo/orden-trabajo.component';
 
 
 
@@ -119,7 +120,8 @@ import { ProductoNuevoComponent } from './components/producto-nuevo/producto-nue
     GastosComponent,
     DashboardComponent,
     StocklotesComponent,
-    ProductoNuevoComponent
+    ProductoNuevoComponent,
+    OrdenTrabajoComponent
   ],
   imports: [
     BrowserModule,

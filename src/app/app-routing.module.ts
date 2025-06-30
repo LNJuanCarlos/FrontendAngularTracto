@@ -20,6 +20,7 @@ import { GastosComponent } from './components/reportes/gastos/gastos.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { StocklotesComponent } from './components/reportes/stocklotes/stocklotes.component';
 import { ProductoNuevoComponent } from './components/producto-nuevo/producto-nuevo.component';
+import { OrdenTrabajoComponent } from './components/orden-trabajo/orden-trabajo.component';
 
 
 const routes: Routes = [
@@ -49,6 +50,8 @@ const routes: Routes = [
       { path: 'stocklotes', component: StocklotesComponent},*/
       { path: '', redirectTo: 'producto', pathMatch: 'full' },
       { path: 'producto', component: ProductoNuevoComponent},
+      { path: 'ordenes-trabajo', component: OrdenTrabajoComponent},
+
       {
         path: 'generalwi',
         loadChildren: () => import('./components/ingreso/generalwi.module').then(m => m.GeneralwiModule)
