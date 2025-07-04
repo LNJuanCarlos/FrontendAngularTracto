@@ -5,3 +5,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+
+.swal2-popup {
+    background: #ffffff !important; /* Fondo blanco */
+    color: #000000 !important;      /* Texto negro */
+  }

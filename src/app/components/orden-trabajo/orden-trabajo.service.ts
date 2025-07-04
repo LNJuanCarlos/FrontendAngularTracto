@@ -9,6 +9,10 @@ import { OrdenTrabajoDetalle } from './orden-trabajo.model';
 export class OrdenTrabajoService {
   private baseUrl = 'http://localhost:8080/api/ordenes-trabajo';
 
+  ultimoIdOt: string = '';
+  ultimoComentario: string = '';
+  ultimosDetalles: OrdenTrabajoDetalle[] = [];
+
   constructor(private http: HttpClient) {}
 
   obtenerDetallePorId(idOt: string): Observable<OrdenTrabajoDetalle[]> {

@@ -1,49 +1,96 @@
-<div style="margin-bottom: 20px;">
-  <h2>Buscar Orden de Trabajo</h2>
-
-  <input type="text" [(ngModel)]="idOt" placeholder="Ingrese el ID de la OT" />
-  <button (click)="buscar()" [disabled]="!idOt">Buscar</button>
-</div>
-
-<!-- Si ya se buscó y se encontró -->
-<div *ngIf="detalles.length > 0">
-  <h3>Orden de Trabajo: {{ detalles[0].idOt }}</h3>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Código</th>
-        <th>Producto</th>
-        <th>Cantidad Solicitada</th>
-        <th>Stock</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of detalles">
-        <td>{{ item.codigoProducto }}</td>
-        <td>{{ item.nombreProducto }}</td>
-        <td>{{ item.cantidadSolicitada }}</td>
-        <td>{{ item.cantidadEnStock }}</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div style="margin-top: 20px;">
-    <label for="comentario">Comentario:</label><br />
-    <textarea
-      [(ngModel)]="comentario"
-      id="comentario"
-      rows="4"
-      cols="50"
-    ></textarea>
-    <br />
-    <button (click)="guardarComentario()" [disabled]="!comentario">
-      Guardar Comentario
-    </button>
+<div class="row">
+  <div class="col-md-12 grid-margin stretch-card" style="align-items: center;">
+    <img style="height: 50px; width: 50px;" src="../../../assets/images/ordencompra2.png" />
+    <h2 style="font-size: 30px; margin-bottom: 0px;" class="page-title">MÓDULO DE ÓRDENES DE TRABAJO</h2>
   </div>
 </div>
 
-<!-- Si se buscó y no se encontró -->
-<div *ngIf="busquedaRealizada && detalles.length === 0">
-  <p style="color: red">No se encontró la orden de trabajo.</p>
+<div class="row">
+  <div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <form>
+          <div class="row">
+            <div class="col-sm-5" style="align-self: center;">
+              <h6 style="font-weight: 500; font-size: 16px; margin-bottom: 0px;" class="card-title">
+                CONSULTAR ORDEN DE TRABAJO
+              </h6>
+            </div>
+            <div class="col-sm-4" style="text-align: right;">
+              <div class="input-group">
+                <input type="text" class="form-control" [(ngModel)]="idOt" name="idOt" placeholder="Ingrese ID de OT (Ej: 0000001)" />
+                <div class="col-sm-3 text-end">
+                  <button type="button" (click)="buscar()" class="btn btn-primary btn-icon-text">
+                    <i class="feather icon-search btn-icon-prepend"></i> BUSCAR
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Si hay detalles -->
+<div class="row" *ngIf="detalles && detalles.length > 0">
+  <div class="col-md-12 stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h6 style="font-weight: 500; font-size: 16px;" class="card-title">DETALLE DE ORDEN DE TRABAJO</h6>
+        <div class="table-responsive">
+          <table id="OT" class="table table-bordered table-lg text-center">
+            <thead class="bg-primary">
+              <tr>
+                <th>Código</th>
+                <th>Producto</th>
+                <th>Cantidad Solicitada</th>
+                <th>Stock</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of detalles">
+                <td>{{ item.codigoProducto }}</td>
+                <td>{{ item.nombreProducto }}</td>
+                <td>{{ item.cantidadSolicitada }}</td>
+                <td>{{ item.cantidadEnStock }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Comentario -->
+        <div style="margin-top: 20px;">
+          <label for="comentario">Comentario:</label><br>
+          <textarea
+            [(ngModel)]="comentario"
+            [disabled]="!modoEdicion"
+            id="comentario"
+            rows="4"
+            cols="67"
+          ></textarea>
+          <br>
+        
+          <!-- Botón para editar -->
+          <button *ngIf="!modoEdicion" class="btn btn-warning" (click)="editarComentario()">Editar</button>
+        
+          <!-- Botón para guardar -->
+          <button *ngIf="modoEdicion" class="btn btn-success" (click)="guardarComentario()" [disabled]="!comentario">
+            Guardar
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Si no hay detalles -->
+<div class="row" *ngIf="detalles.length === 0 && error">
+  <div class="col-md-12">
+    <div class="alert alert-warning text-center">
+      {{ error }}
+    </div>
+  </div>
 </div>
