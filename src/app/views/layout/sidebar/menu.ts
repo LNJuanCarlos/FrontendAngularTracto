@@ -17,6 +17,12 @@ export const MENU: MenuItem[] = [
     icon: 'file-text',
     link: 'ordenes-trabajo'
   }
+,
+  {
+    label: 'Certificado de Mantenimiento',
+    icon: 'pie-chart',
+    link: 'orden-certificado'
+  }
   /*{
     label: 'Dashboard',
     icon: 'home',

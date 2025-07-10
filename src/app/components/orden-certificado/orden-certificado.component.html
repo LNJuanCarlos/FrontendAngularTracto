@@ -1,0 +1,76 @@
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card" style="align-items: center;">
+      <img style="height: 50px; width: 50px;" src="../../../assets/images/certificado.gif" />
+      <h2 style="font-size: 30px; margin-bottom: 0px;" class="page-title">CERTIFICADOS DE MANTENIMIENTO</h2>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <form class="form-inline">
+            <div class="form-group mr-2">
+              <input type="text" class="form-control" placeholder="Compañía" [(ngModel)]="compania" name="compania">
+            </div>
+            <div class="form-group mr-2">
+              <input type="number" class="form-control" placeholder="Número Doc" [(ngModel)]="numeroDoc" name="numeroDoc">
+            </div>
+            <button type="button" class="btn btn-primary" (click)="buscar()">Buscar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row" *ngIf="certificados.length > 0">
+    <div class="col-md-12 stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h6 class="card-title">Resultado</h6>
+          <div class="table-responsive">
+            <table class="table table-bordered text-center">
+              <thead class="bg-primary text-white">
+                <tr>
+                  <th>Empresa</th>
+                  <th>Fecha</th>
+                  <th>Cliente</th>
+                  <th>Marca</th>
+                  <th>Modelo</th>
+                  <th>Color</th>
+                  <th>Serie de chasis</th>
+                  <th>Placa</th>
+                  <th>Motor</th>
+                  <th>Kilometraje</th>
+                  <th>Horas</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of certificados">
+                  <td>{{ item.nombreEmpresa }}</td>
+                  <td>{{ item.fecha | date:'shortDate' }}</td>
+                  <td>{{ item.nombreCompleto }}</td>
+                  <td>{{ item.descripcionMarca }}</td>
+                  <td>{{ item.modelo }}</td>
+                  <td>{{ item.descripcionColor }}</td>
+                  <td>{{ item.maquinaCodigo}}</td>
+                  <td>{{ item.numeroPlaca }}</td>
+                  <td>{{ item.numeroMotor }}</td>
+                  <td>{{ item.maquinaKilometraje }}</td>
+                  <td>{{ item.maquinaHoraKilometraje }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row" *ngIf="error">
+    <div class="col-md-12">
+      <div class="alert alert-warning text-center">
+        {{ error }}
+      </div>
+    </div>
+  </div>

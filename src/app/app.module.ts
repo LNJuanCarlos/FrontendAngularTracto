@@ -77,6 +77,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { StocklotesComponent } from './components/reportes/stocklotes/stocklotes.component';
 import { ProductoNuevoComponent } from './components/producto-nuevo/producto-nuevo.component';
 import { OrdenTrabajoComponent } from './components/orden-trabajo/orden-trabajo.component';
+import { OrdenCertificadoComponent } from './components/orden-certificado/orden-certificado.component';
 
 
 
@@ -121,7 +122,8 @@ import { OrdenTrabajoComponent } from './components/orden-trabajo/orden-trabajo.
     DashboardComponent,
     StocklotesComponent,
     ProductoNuevoComponent,
-    OrdenTrabajoComponent
+    OrdenTrabajoComponent,
+    OrdenCertificadoComponent
   ],
   imports: [
     BrowserModule,

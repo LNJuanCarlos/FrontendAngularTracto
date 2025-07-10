@@ -21,6 +21,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { StocklotesComponent } from './components/reportes/stocklotes/stocklotes.component';
 import { ProductoNuevoComponent } from './components/producto-nuevo/producto-nuevo.component';
 import { OrdenTrabajoComponent } from './components/orden-trabajo/orden-trabajo.component';
+import { OrdenCertificadoComponent } from './components/orden-certificado/orden-certificado.component';
 
 
 const routes: Routes = [
@@ -51,6 +52,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'producto', pathMatch: 'full' },
       { path: 'producto', component: ProductoNuevoComponent},
       { path: 'ordenes-trabajo', component: OrdenTrabajoComponent},
+      { path: 'orden-certificado', component: OrdenCertificadoComponent },
 
       {
         path: 'generalwi',
