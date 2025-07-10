@@ -4,6 +4,10 @@
       <h2 style="font-size: 30px; margin-bottom: 0px;" class="page-title">CERTIFICADOS DE MANTENIMIENTO</h2>
     </div>
   </div>
+
+  <button class="btn btn-danger mb-3" (click)="exportarPDF()" [disabled]="certificados.length === 0">
+    <i class="fas fa-file-pdf"></i> Exportar Certificado PDF
+  </button>
   
   <div class="row">
     <div class="col-md-12 grid-margin stretch-card">
