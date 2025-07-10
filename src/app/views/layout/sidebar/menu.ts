@@ -6,7 +6,7 @@ export const MENU: MenuItem[] = [
     isTitle: true
   },
 
-  {
+  /*{
     label: 'Productos',
     icon: 'package',
     link: '/producto'
@@ -17,12 +17,12 @@ export const MENU: MenuItem[] = [
     icon: 'file-text',
     link: 'ordenes-trabajo'
   }
-,
+,*/
   {
-    label: 'Certificado de Mantenimiento',
+    label: 'Certificados',
     icon: 'pie-chart',
-    link: 'orden-certificado'
-  }
+    link: '/orden-certificado'
+  },
   /*{
     label: 'Dashboard',
     icon: 'home',
