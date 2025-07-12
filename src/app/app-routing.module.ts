@@ -49,7 +49,7 @@ const routes: Routes = [
       { path: 'gastos', component: GastosComponent},
       { path: 'dashboard', component: DashboardComponent},
       { path: 'stocklotes', component: StocklotesComponent},*/
-      { path: '', redirectTo: 'producto', pathMatch: 'full' },
+      { path: '', redirectTo: 'orden-certificado', pathMatch: 'full' },
       { path: 'producto', component: ProductoNuevoComponent},
       { path: 'ordenes-trabajo', component: OrdenTrabajoComponent},
       { path: 'orden-certificado', component: OrdenCertificadoComponent },
