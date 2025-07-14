@@ -65,6 +65,17 @@ exportarPDF() {
     return `Lima, ${dia} de ${mes} del ${anio}`;
   }
 
+  function formatearFechaLima(fecha: Date): string {
+    const meses = [
+      'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+      'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+    ];
+    const dia = fecha.getDate();
+    const mes = meses[fecha.getMonth()];
+    const anio = fecha.getFullYear();
+    return `Lima, ${dia} de ${mes} del ${anio}`;
+  }
+
 
 
   const img = new Image();
@@ -74,7 +85,8 @@ exportarPDF() {
 
     doc.setFontSize(10);
     //doc.text(`Lima, ${fechaActual}`, 150, 20);
-    doc.text(obtenerFechaPersonalizada(), 140, 20);
+    //doc.text(obtenerFechaPersonalizada(), 140, 20);
+    doc.text(formatearFechaLima(new Date(certificado.fecha)), 140, 20);
 
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(14);
