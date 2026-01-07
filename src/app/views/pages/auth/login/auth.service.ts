@@ -1,105 +1,83 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
 import { Usuario } from './usuario';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
+export class AuthService {
 
-export class AuthService{
+  private _usuario: Usuario;
+  private _token: string | null = null;
 
-    private _usuario: Usuario;
-    private _token: string;
+  private url = 'http://localhost:8080/api/auth/login';
 
-    constructor(private hhtp: HttpClient){}
+  constructor(private http: HttpClient) {}
 
-    public get usuario():Usuario{
-        if(this._usuario!=null){
-            return this._usuario;
-         }else if (this._usuario == null && sessionStorage.getItem('usuario')!=null){
-            this._usuario = JSON.parse(sessionStorage.getItem('usuario')) as Usuario;
-             return this._usuario;  
-         }
+  /* ================= USUARIO ================= */
 
-         return new Usuario();
-
+  public get usuario(): Usuario {
+    if (this._usuario != null) {
+      return this._usuario;
+    } else if (this._usuario == null && sessionStorage.getItem('usuario') != null) {
+      this._usuario = JSON.parse(sessionStorage.getItem('usuario')) as Usuario;
+      return this._usuario;
     }
+    return new Usuario();
+  }
 
-    public get token():string{
-        if(this._token!=null){
-            return this._token;
-         }else if (this._token == null && sessionStorage.getItem('token')!=null){
-             this._token = sessionStorage.getItem('token');
-             return this._token;
-         }
+  /* ================= TOKEN ================= */
 
-         return null;
+  public get token(): string | null {
+    if (this._token != null) {
+      return this._token;
+    } else if (this._token == null && sessionStorage.getItem('token') != null) {
+      this._token = sessionStorage.getItem('token');
+      return this._token;
     }
+    return null;
+  }
 
-    login(usuario: Usuario):Observable<any>{
-        const urlEndpint = 'http://localhost:8080/oauth/token';
-        const credenciales = btoa('angularapp' + ':' + '12345');
-        const httpHeaders = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded',
-        'Authorization': 'Basic ' + credenciales});
-        let params = new URLSearchParams();
-        params.set('grant_type','password');
-        params.set('username',usuario.username);
-        params.set('password',usuario.password);    
-        console.log(params.toString());
-        return this.hhtp.post(urlEndpint, params.toString(), {headers: httpHeaders});
+  public set token(value: string | null) {
+    this._token = value;
+    if (value) {
+      sessionStorage.setItem('token', value);
+    } else {
+      sessionStorage.removeItem('token');
     }
+  }
 
-    guardarUsuario(accessToken: string): void{
-        let payload = this.obtenerDatosToken(accessToken);
-        this._usuario = new Usuario();
-        this._usuario.username = payload.user_name;
-        this._usuario.rol = payload.authorities;
-        this._usuario.nombre = payload.nombre;
-        this._usuario.correo = payload.correo;
-        sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
-    }
+  /* ================= LOGIN ================= */
 
-    guardarToken(accessToken: string): void{
-        this._token = accessToken;
-        sessionStorage.setItem('token',accessToken);
-    }
+  login(usuario: Usuario): Observable<any> {
+    return this.http.post<any>(this.url, {
+      usuario: usuario.username,
+      password: usuario.password
+    });
+  }
 
-    obtenerDatosToken(accessToken: string): any{
-        if(accessToken !=null){
-            return JSON.parse(atob(accessToken.split(".")[1]));
-        }
-        return null;
-    }
+  guardarUsuario(persona: number, username: string, token: string): void {
+    this._usuario = new Usuario();
+    this._usuario.id = persona;
+    this._usuario.username = username;
 
-    isAuthenticated():boolean{
-        let payload = this.obtenerDatosToken(this.token);
-        if(payload != null && payload.user_name && payload.user_name.length>0){
-            return true; 
-        }
-        return false;
-    }
+    this.token = token;
 
+    sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
+    localStorage.setItem('isLoggedin', 'true');
+  }
 
-    hasRole(role: string): boolean{
-        if(this.usuario.rol.includes(role)){
-            return true;
-        }
-        return false;
-    }
+  /* ================= AUTH ================= */
 
-    nothasRole(role: string): boolean{
-        if(this.usuario.rol.includes(role)){
-            return false;
-        }
-        return true;
-    }
+  isAuthenticated(): boolean {
+    return localStorage.getItem('isLoggedin') === 'true' && this.token != null;
+  }
 
-
-    logout():void{
-        this._token = null;
-        this._usuario = null;
-        sessionStorage.clear();
-    }
-
+  logout(): void {
+    this._usuario = null;
+    this._token = null;
+    sessionStorage.clear();
+    localStorage.clear();
+  }
 }

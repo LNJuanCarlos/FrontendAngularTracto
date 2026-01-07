@@ -22,14 +22,16 @@ import { StocklotesComponent } from './components/reportes/stocklotes/stocklotes
 import { ProductoNuevoComponent } from './components/producto-nuevo/producto-nuevo.component';
 import { OrdenTrabajoComponent } from './components/orden-trabajo/orden-trabajo.component';
 import { OrdenCertificadoComponent } from './components/orden-certificado/orden-certificado.component';
+import { LoginComponent } from './views/pages/auth/login/login.component';
 
 
 const routes: Routes = [
-  //{ path:'auth', loadChildren: () => import('./views/pages/auth/auth.module').then(m => m.AuthModule) },--- Comentado por mi
+
+  { path:'auth', loadChildren: () => import('./views/pages/auth/auth.module').then(m => m.AuthModule) },//--- Comentado por mi
   {
     path: '',
     component: BaseComponent,
-    //canActivate: [AuthGuard], ---Comentado por mi
+    canActivate: [AuthGuard], //---Comentado por mi
     children: [
           
       /*{ path: '', redirectTo: 'dashboard', pathMatch: 'full' }, 
@@ -49,9 +51,7 @@ const routes: Routes = [
       { path: 'gastos', component: GastosComponent},
       { path: 'dashboard', component: DashboardComponent},
       { path: 'stocklotes', component: StocklotesComponent},*/
-      { path: '', redirectTo: 'producto', pathMatch: 'full' },
-      { path: 'producto', component: ProductoNuevoComponent},
-      { path: 'ordenes-trabajo', component: OrdenTrabajoComponent},
+      { path: '', redirectTo: 'orden-certificado', pathMatch: 'full' },
       { path: 'orden-certificado', component: OrdenCertificadoComponent },
 
       {

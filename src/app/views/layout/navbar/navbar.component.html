@@ -46,3 +46,51 @@
   </div>
 </nav>!-->
 
+<nav class="navbar">
+  <a href="" class="sidebar-toggler" (click)="toggleSidebar($event)">
+    <i class="feather icon-menu"></i>
+  </a>
+
+  <div class="navbar-content">
+    <ul class="navbar-nav ms-auto">
+
+      <li class="nav-item nav-profile" ngbDropdown>
+        <a class="nav-link" ngbDropdownToggle id="profileDropdown">
+          <img src="assets/usuario.png" alt="profile">
+        </a>
+
+        <div ngbDropdownMenu aria-labelledby="profileDropdown">
+          <div class="dropdown-header d-flex flex-column align-items-center">
+            <div class="figure mb-3">
+              <img src="assets/usuario.png" alt="profile">
+            </div>
+
+            <div class="info text-center">
+              <p class="name font-weight-bold mb-0">
+                {{ authService.usuario.nombre }}
+              </p>
+              <p class="name font-weight-bold mb-0">
+                Usuario: {{ authService.usuario.username }}
+              </p>
+              <p class="email text-muted mb-3">
+                {{ authService.usuario.correo }}
+              </p>
+            </div>
+          </div>
+
+          <div class="dropdown-body">
+            <ul class="profile-nav p-0 pt-3">
+              <li class="nav-item">
+                <a href="" (click)="logout($event)" class="nav-link">
+                  <i class="feather icon-log-out"></i>
+                  <span>Cerrar sesión</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+</nav>

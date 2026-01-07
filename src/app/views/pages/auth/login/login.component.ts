@@ -41,28 +41,38 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  login():void{
-    console.log(this.usuario);
-    if(this.usuario.username == null || this.usuario.password == null){
-      Swal.fire('Error Login', 'Username o Password Vacíos!', 'error');
-      return;
-    }
-    this.authServie.login(this.usuario).subscribe(response =>{
-      console.log(response);
-      this.authServie.guardarUsuario(response.access_token);
-      this.authServie.guardarToken(response.access_token);
-      let usuario = this.authServie.usuario;
-      localStorage.setItem('isLoggedin', 'true');
-    if (localStorage.getItem('isLoggedin')) {
-      this.router.navigate([this.returnUrl]);
-    }
-      Swal.fire('Login', `Hola ${usuario.username}, has iniciado sesión con éxito!`, 'success');
-    }, err =>{
-        if(err.status == 400){
-          Swal.fire('Error Login', 'Usuario y Clave incorrecta!', 'error');
-        }
-    }
-    );
+  login(): void {
+
+  if (!this.usuario.username || !this.usuario.password) {
+    Swal.fire('Error Login', 'Usuario o contraseña vacíos', 'error');
+    return;
   }
+
+  this.authServie.login(this.usuario).subscribe(
+    response => {
+
+      this.authServie.guardarUsuario(
+        response.persona,
+        this.usuario.username,
+        response.acces_token
+      );
+
+      this.router.navigate([this.returnUrl]);
+
+      Swal.fire(
+        'Login',
+        'Has iniciado sesión con éxito!',
+        'success'
+      );
+    },
+    err => {
+      Swal.fire(
+        'Error Login',
+        err.error?.mensaje || 'Usuario o contraseña incorrectos',
+        'error'
+      );
+    }
+  );
+}
 
 }

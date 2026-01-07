@@ -17,7 +17,7 @@ import { Egreso } from '../egreso/egreso';
 import { CategoriatransaccionService } from '../categoriatransaccion/categoriatransaccion.service';
 import { Categoriatransaccion } from '../categoriatransaccion/categoriatransaccion';
 import { Itemtransaccion } from '../itemtransaccion/itemtransaccion';
-import { stringify } from 'querystring';
+//import { stringify } from 'querystring';
 import { IngresoService } from '../ingreso/ingreso.service';
 import { EgresoService } from '../egreso/egreso.service';
 
