@@ -52,11 +52,6 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent},
       { path: 'stocklotes', component: StocklotesComponent},*/
       { path: '', redirectTo: 'orden-certificado', pathMatch: 'full' },
-<<<<<<< HEAD
-=======
-      { path: 'producto', component: ProductoNuevoComponent},
-      { path: 'ordenes-trabajo', component: OrdenTrabajoComponent},
->>>>>>> a424338e66d42d76f108ce6cd9e9ffa710a5afaf
       { path: 'orden-certificado', component: OrdenCertificadoComponent },
 
       {
