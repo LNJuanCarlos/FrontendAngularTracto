@@ -52,10 +52,10 @@ export class LoginComponent implements OnInit {
     response => {
 
       this.authServie.guardarUsuario(
-        response.persona,
-        this.usuario.username,
-        response.acces_token
-      );
+  response.documento,   //  DOCUMENTO REAL
+  response.persona,     //  ID PERSONA
+  response.token
+);
 
       this.router.navigate([this.returnUrl]);
 

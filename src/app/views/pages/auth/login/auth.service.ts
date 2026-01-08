@@ -57,16 +57,15 @@ export class AuthService {
     });
   }
 
-  guardarUsuario(persona: number, username: string, token: string): void {
-    this._usuario = new Usuario();
-    this._usuario.id = persona;
-    this._usuario.username = username;
+  guardarUsuario(documento: string, persona: number, token: string): void {
+  this._usuario = new Usuario();
+  this._usuario.username = documento; // DOCUMENTO
+  this._usuario.persona = persona;    // ID PERSONA
 
-    this.token = token;
-
-    sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
-    localStorage.setItem('isLoggedin', 'true');
-  }
+  this.token = token;
+  sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
+  localStorage.setItem('isLoggedin', 'true');
+}
 
   /* ================= AUTH ================= */
 
@@ -80,4 +79,14 @@ export class AuthService {
     sessionStorage.clear();
     localStorage.clear();
   }
+
+  cambiarPassword(claveActual: string, nuevaClave: string): Observable<any> {
+  const url = 'http://localhost:8080/api/auth/cambiar-clave';
+
+  return this.http.post(url, {
+    documento: this.usuario.username, //  DOCUMENTO REAL
+    claveActual: claveActual,
+    nuevaClave: nuevaClave
+  });
+}
 }

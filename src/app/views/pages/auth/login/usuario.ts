@@ -1,14 +1,14 @@
 export class Usuario {
 
-  id: number;
-  username: string;
+  username: string;     // DOCUMENTO (DNI / RUC)
+  persona: number;      // ID PERSONA (127478)
 
   nombre?: string;
   correo?: string;
 
   enabled?: boolean;
 
-  // ⚠️ solo se usa para login, NO se guarda
+  // solo para login
   password?: string;
 
   rol: string[] = [];
