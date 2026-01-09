@@ -81,19 +81,17 @@
           <div class="dropdown-body">
             <ul class="profile-nav p-0 pt-3">
 
-              <li class="nav-item">
-                <a href="" class="nav-link" (click)="abrirCambioClave($event)">
-                  <i class="feather icon-lock"></i>
-                  <span>Cambiar Contraseña</span>
-                </a>
-              </li>
+              <button type="button" class="dropdown-item" (click)="abrirModal(); $event.stopPropagation()">
+                <i class="feather icon-lock"></i>
+                <span>Cambiar Contraseña</span>
+              </button>
 
-              <li class="nav-item">
-                <a href="" (click)="logout($event)" class="nav-link">
-                  <i class="feather icon-log-out"></i>
-                  <span>Cerrar sesión</span>
-                </a>
-              </li>
+              <button type="button" class="dropdown-item" (click)="logout($event); $event.stopPropagation()">
+                <i class="feather icon-log-out"></i>
+                <span>Cerrar sesión</span>
+              </button>
+
+             
             </ul>
           </div>
         </div>
@@ -104,12 +102,15 @@
 </nav>
 
 <!-- Modal para cambio de contraseña -->
-<div class="modal fade" id="cambioClaveModal" tabindex="-1" role="dialog" aria-labelledby="cambioClaveModalLabel" aria-hidden="true">
+<div class="modal fade show" *ngIf="mostrarModal" style="display: block; background: rgba(0,0,0,.5);"
+  id="cambioClaveModal" tabindex="-1" role="dialog" aria-labelledby="cambioClaveModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="cambioClaveModalLabel">Cambiar Contraseña</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+        <h5 class="modal-title w-100 text-center font-weight-bold">
+          Cambiar Contraseña
+        </h5>
+        <button type="button" class="close" (click)="cerrarModal()" aria-label="Cerrar">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -117,21 +118,52 @@
         <form #cambiarClaveForm="ngForm">
           <div class="form-group">
             <label>Clave Actual</label>
-            <input type="password" class="form-control" [(ngModel)]="claveActual" name="claveActual" required>
+            <div class="input-group">
+              <input [type]="verClaveActual ? 'text' : 'password'" class="form-control" [(ngModel)]="claveActual"
+                name="claveActual" required>
+
+              <div class="input-group-append">
+                <span class="input-group-text cursor" (click)="verClaveActual = !verClaveActual">
+                  👁
+                </span>
+              </div>
+            </div>
           </div>
+
           <div class="form-group">
             <label>Nueva Clave</label>
-            <input type="password" class="form-control" [(ngModel)]="nuevaClave" name="nuevaClave" required minlength="6">
+            <div class="input-group">
+              <input [type]="verClaveNueva ? 'text' : 'password'" class="form-control" [(ngModel)]="nuevaClave"
+                name="nuevaClave" required minlength="6">
+
+              <div class="input-group-append">
+                <span class="input-group-text cursor" (click)="verClaveNueva = !verClaveNueva">
+                  👁
+                </span>
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <label>Confirmar Nueva Clave</label>
-            <input type="password" class="form-control" [(ngModel)]="confirmarClave" name="confirmarClave" required minlength="6">
+            <div class="input-group">
+              <input [type]="verClaveConfirmar ? 'text' : 'password'" class="form-control" [(ngModel)]="confirmarClave"
+                name="confirmarClave" required minlength="6">
+
+              <div class="input-group-append">
+                <span class="input-group-text cursor" (click)="verClaveConfirmar = !verClaveConfirmar">
+                  👁
+                </span>
+              </div>
+            </div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" (click)="cambiarClave()" [disabled]="!claveActual || !nuevaClave || nuevaClave !== confirmarClave">Guardar Cambios</button>
+        <button type="button" class="btn btn-secondary" (click)="cerrarModal()">
+          Cancelar
+        </button>
+        <button type="button" class="btn btn-primary" (click)="cambiarClave()"
+          [disabled]="!claveActual || !nuevaClave || nuevaClave !== confirmarClave">Guardar Cambios</button>
       </div>
     </div>
   </div>

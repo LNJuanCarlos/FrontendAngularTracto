@@ -10,12 +10,13 @@
   left: $sidebar-width-lg;
   z-index: 978;
   -webkit-box-shadow: 3px 0 1px 0 #03060b;
-          box-shadow: 3px 0 1px 0 #03060b;
+  box-shadow: 3px 0 1px 0 #03060b;
   transition: width .1s ease, left .1s ease;
 
   @media(max-width: 991px) {
     width: 100%;
     left: 0;
+
     .navbar-content {
       width: calc(100% - #{$sidebar-folded-width} - 1px);
     }
@@ -28,13 +29,20 @@
     align-items: center;
     padding: 0 25px;
     display: none;
+
     i {
       font-size: 20px;
       color: #9b9b9b;
     }
+
     @media(max-width: 991px) {
-      display: flex;    
+      display: flex;
     }
+  }
+
+  .cursor {
+    cursor: pointer;
+    user-select: none;
   }
 
   .search-form {
@@ -43,6 +51,7 @@
     @extend .align-items-center;
     width: 100%;
     margin-right: 60px;
+
     .input-group {
       .input-group-prepend {
         .input-group-text {
@@ -50,26 +59,32 @@
           border: 0;
           color: #7c818f;
           background: transparent;
+
           i {
             font-size: 20px;
             cursor: pointer;
           }
         }
       }
+
       .form-control {
         border: 0;
         background: transparent;
         padding: 0 .8rem;
         color: $text-muted;
+
         &::-webkit-input-placeholder {
           color: #7c818f;
         }
+
         &:-ms-input-placeholder {
           color: #7c818f;
         }
+
         &::-ms-input-placeholder {
           color: #7c818f;
         }
+
         &::placeholder {
           color: #7c818f;
         }
@@ -83,13 +98,16 @@
     height: 100%;
     padding-left: 25px;
     padding-right: 25px;
+
     @media(max-width: 991px) {
       width: calc(100% - #{$sidebar-folded-width} - 1px);
     }
+
     .navbar-nav {
       display: flex;
       flex-direction: row;
       margin-left: auto;
+
       .nav-item {
         position: relative;
         margin-left: 5px;
@@ -97,47 +115,56 @@
         min-width: 30px;
         display: flex;
         align-items: center;
+
         .nav-link {
           color: #bfc3ce;
           padding: 0;
           position: relative;
           margin-left: auto;
           margin-right: auto;
+
           &:hover,
           &[aria-expanded="true"] {
             color: theme-color(primary);
           }
+
           &::after {
             display: none;
           }
+
           .link-icon {
             font-size: 20px;
             line-height: inherit;
           }
+
           .indicator {
             position: absolute;
             top: 3px;
             right: 2px;
+
             .circle {
-                background: theme-color(primary);
-                width: 7px;
-                height: 7px;
+              background: theme-color(primary);
+              width: 7px;
+              height: 7px;
+              border-radius: 50%;
+
+              &::before {
+                background-color: theme-color(primary);
+                content: "";
+                display: table;
                 border-radius: 50%;
-                &::before {
-                    background-color: theme-color(primary);
-                    content: "";
-                    display: table;
-                    border-radius: 50%;
-                    position: absolute;
-                    @extend .pulse;
-                }
+                position: absolute;
+                @extend .pulse;
+              }
             }
           }
         }
+
         &.dropdown {
           @media(max-width: 767px) {
             position: static;
           }
+
           .dropdown-menu {
             max-width: 280px;
             position: absolute;
@@ -148,6 +175,7 @@
             border: 1px solid $border-color;
             @extend .dropdownAnimation;
             font-size: .875rem;
+
             &::before {
               content: '';
               width: 13px;
@@ -160,18 +188,22 @@
               border-top: 1px solid $border-color;
               border-left: 1px solid $border-color;
             }
+
             @media(max-width: 767px) {
               right: 20px;
               width: calc(100% - 40px);
-              &::before{
+
+              &::before {
                 display: none;
               }
             }
+
             .dropdown-header {
               border-bottom: 1px solid $border-color;
             }
           }
         }
+
         &.nav-apps {
           .dropdown-menu {
             .dropdown-body {
@@ -185,50 +217,62 @@
                   align-items: center;
                   justify-content: center;
                   transition: all .2s ease-in-out;
+
                   i {
                     color: $text-muted;
                     font-size: 20px;
                   }
+
                   p {
                     font-size: 12px;
                     margin-top: 5px;
                     color: $text-muted;
                   }
+
                   &:hover {
-                    background-color: rgba(theme-color(primary), .1);    
-                    i, svg { 
-                      color: theme-color(primary);  
-                    }             
+                    background-color: rgba(theme-color(primary), .1);
+
+                    i,
+                    svg {
+                      color: theme-color(primary);
+                    }
                   }
                 }
               }
             }
           }
         }
+
         &.nav-apps,
         &.nav-notifications,
         &.nav-messages {
           .dropdown-menu {
             padding: 0;
+
             .dropdown-header {
               padding: 12px 20px;
               font-size: 13px;
             }
+
             .dropdown-body {
               padding: 5px;
               max-height: 300px;
               position: relative;
+
               .dropdown-item {
                 display: flex;
                 align-items: center;
                 padding: 9px 16px;
                 transition: background .2s ease-in-out;
+
                 &:hover {
                   background: rgb(248, 248, 248);
+
                   .arrow {
                     color: theme-color(primary);
                   }
                 }
+
                 .icon {
                   width: 30px;
                   height: 30px;
@@ -237,10 +281,12 @@
                   align-items: center;
                   justify-content: center;
                   background: rgb(247, 247, 247);
+
                   i {
                     font-size: 15px;
                   }
                 }
+
                 .figure {
                   img {
                     width: 30px;
@@ -248,115 +294,147 @@
                     border-radius: 50%;
                   }
                 }
+
                 &:nth-child(1) {
                   &:hover {
-                    background: rgba(theme-color(primary), .07);  
+                    background: rgba(theme-color(primary), .07);
+
                     .arrow {
-                      color: theme-color(primary);                                        
-                    }                                      
+                      color: theme-color(primary);
+                    }
                   }
+
                   .icon {
                     background: rgba(theme-color(primary), .1);
+
                     i {
                       color: theme-color(primary);
                     }
                   }
                 }
+
                 &:nth-child(2) {
                   &:hover {
                     background: rgba(theme-color(success), .07);
+
                     .arrow {
-                      color: theme-color(success);                                        
-                    }                                        
+                      color: theme-color(success);
+                    }
                   }
+
                   .icon {
                     background: rgba(theme-color(success), .1);
+
                     i {
                       color: theme-color(success);
                     }
                   }
                 }
+
                 &:nth-child(3) {
                   &:hover {
-                    background: rgba(theme-color(danger), .07);    
+                    background: rgba(theme-color(danger), .07);
+
                     .arrow {
-                      color: theme-color(danger);                                        
-                    }                                    
+                      color: theme-color(danger);
+                    }
                   }
+
                   .icon {
                     background: rgba(theme-color(danger), .1);
+
                     i {
                       color: theme-color(danger);
                     }
                   }
                 }
+
                 &:nth-child(4) {
                   &:hover {
-                    background: rgba(theme-color(warning), .07);    
+                    background: rgba(theme-color(warning), .07);
+
                     .arrow {
-                      color: theme-color(warning);                                        
-                    }                                     
+                      color: theme-color(warning);
+                    }
                   }
+
                   .icon {
                     background: rgba(theme-color(warning), .1);
+
                     i {
                       color: theme-color(warning);
                     }
                   }
                 }
+
                 &:nth-child(5) {
                   &:hover {
-                    background: rgba(theme-color(info), .07);    
+                    background: rgba(theme-color(info), .07);
+
                     .arrow {
-                      color: theme-color(info);                                        
-                    }                                     
+                      color: theme-color(info);
+                    }
                   }
+
                   .icon {
                     background: rgba(theme-color(info), .1);
+
                     i {
                       color: theme-color(info);
                     }
                   }
                 }
+
                 &:nth-child(6) {
                   &:hover {
                     background: rgba(theme-color(success), .07);
+
                     .arrow {
-                      color: theme-color(success);                                        
-                    }                                     
+                      color: theme-color(success);
+                    }
                   }
+
                   .icon {
                     background: rgba(theme-color(success), .1);
+
                     i {
                       color: theme-color(success);
                     }
                   }
                 }
+
                 &:nth-child(7) {
                   &:hover {
                     background: rgba(theme-color(danger), .07);
+
                     .arrow {
-                      color: theme-color(danger);                                        
-                    }                                     
+                      color: theme-color(danger);
+                    }
                   }
+
                   .icon {
                     background: rgba(theme-color(danger), .1);
+
                     i {
                       color: theme-color(danger);
                     }
                   }
                 }
+
                 .content {
                   margin-left: 15px;
                   width: 200px;
                   white-space: normal;
+
                   p {
                     margin-bottom: 0;
                   }
+
                   .sub-text {
                     font-size: 12px;
                   }
                 }
+
                 .arrow {
                   width: 15px;
                   height: 15px;
@@ -366,6 +444,7 @@
                 }
               }
             }
+
             .dropdown-footer {
               padding: 10px 20px;
               border-top: 1px solid $border-color;
@@ -373,24 +452,31 @@
             }
           }
         }
+
         &.nav-profile {
           .nav-link {
             img {
-                width: 30px;
-                height: 30px;
-                border-radius: 50%;
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
             }
           }
+
           .dropdown-menu {
             padding: 20px;
             min-width: 230px;
+
             @media(max-width: 767px) {
-              width: auto;;
+              width: auto;
+              ;
             }
+
             .dropdown-header {
               padding: 0;
+
               .figure {
                 position: relative;
+
                 img {
                   width: 80px;
                   height: 80px;
@@ -398,23 +484,28 @@
                   padding: 3px;
                 }
               }
+
               .info {
                 .name {
                   font-size: 16px;
                 }
+
                 .email {
                   font-size: 13px;
                 }
               }
             }
+
             .dropdown-body {
               .profile-nav {
                 .nav-item {
                   width: auto;
                   margin: 0 0 5px 0;
+
                   &:last-child {
                     margin-bottom: 0;
                   }
+
                   .nav-link {
                     display: flex;
                     align-items: center;
@@ -423,15 +514,18 @@
                     color: $text-muted;
                     -webkit-transition: color .2s ease-in-out;
                     transition: color .2s ease-in-out;
+
                     i {
                       font-size: 16px;
                       margin-right: 20px;
                     }
+
                     span {
                       font-size: 14px;
                       margin-top: 2px;
                     }
                   }
+
                   &:hover {
                     .nav-link {
                       color: theme-color(primary);
@@ -439,6 +533,7 @@
                   }
                 }
               }
+
               button {
                 i {
                   font-size: 15px;

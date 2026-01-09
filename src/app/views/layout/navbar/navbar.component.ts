@@ -6,7 +6,6 @@ import { AuthService } from '../../pages/auth/login/auth.service';
 import { UsuarioService } from '../../pages/auth/login/usuario.service';
 import { Renderer2 } from '@angular/core';
 
-declare var $: any;
 
 @Component({
   selector: 'app-navbar',
@@ -18,7 +17,11 @@ export class NavbarComponent implements OnInit {
   claveActual: string = '';
   nuevaClave: string = '';
   confirmarClave: string = '';
-  
+  verClaveActual = false;
+  verClaveNueva = false;
+  verClaveConfirmar = false;
+  mostrarModal = false;
+
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -35,42 +38,42 @@ export class NavbarComponent implements OnInit {
     this.document.body.classList.toggle('sidebar-open');
   }
 
-  // Abrir modal
-  abrirCambioClave(event: Event) {
-    event.preventDefault();
-    ($('#cambioClaveModal') as any).modal('show'); // Usando jQuery bootstrap modal
-  }
+  abrirModal() {
+  this.mostrarModal = true;
+}
+
+cerrarModal() {
+  this.mostrarModal = false;
+}
+
 
   // Método para cambiar la clave
   cambiarClave() {
 
-  if (this.nuevaClave !== this.confirmarClave) {
-    Swal.fire('Error', 'Las contraseñas no coinciden', 'error');
-    return;
+    if (this.nuevaClave !== this.confirmarClave) {
+      Swal.fire('Error', 'Las contraseñas no coinciden', 'error');
+      return;
+    }
+
+    const user = this.authService.usuario;
+
+    console.log('Documento enviado:', user.username);
+
+    this.usuarioService.cambiarClave(
+      user.username,     // DOCUMENTO
+      this.claveActual,
+      this.nuevaClave
+    ).subscribe({
+      
+      error: (err) => {
+        Swal.fire(
+          'Error',
+          err?.error?.mensaje || 'Error al actualizar la contraseña',
+          'error'
+        );
+      }
+    });
   }
-
-  const user = this.authService.usuario;
-
-console.log('Documento enviado:', user.username);
-
-this.usuarioService.cambiarClave(
-  user.username,     // DOCUMENTO
-  this.claveActual,
-  this.nuevaClave
-).subscribe({
-  next: (resp: any) => {
-    Swal.fire('Éxito', resp.mensaje, 'success');
-    ($('#cambioClaveModal') as any).modal('hide');
-  },
-  error: (err) => {
-    Swal.fire(
-      'Error',
-      err?.error?.mensaje || 'Error al actualizar la contraseña',
-      'error'
-    );
-  }
-});
-}
 
 
   logout(event: Event): void {
